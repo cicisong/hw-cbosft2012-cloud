@@ -23,7 +23,7 @@ public class RepositoryFactory {
 		if (instance == null) {
 			if (Constants.isPersistent()) {
 				//#ifdef relacional
-					instance = new RDBRepositoryFactory(HealthWatcherFacade.getPm());//RDB
+//@					instance = new RDBRepositoryFactory(HealthWatcherFacade.getPm());//RDB
 				//#endif
 				instance = new JDORepositoryFactory(HealthWatcherFacade.getPm());//JDO
 			} else {
