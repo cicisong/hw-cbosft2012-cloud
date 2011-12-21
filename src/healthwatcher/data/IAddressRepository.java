@@ -9,6 +9,7 @@ import healthwatcher.model.address.Address;
 /**
  * Data collection interface to be implemented by concrete data
  * collections accessing any persistence mechanism.
+ * Teste o git
  */
 public interface IAddressRepository {
 
