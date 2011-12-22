@@ -35,7 +35,7 @@ public class UpdateEmployeeSearch extends Command {
 			String[] newWords = { employee.getLogin(), employee.getName(),
 					Constants.SERVLET_SERVER_PATH,
 					HTMLCode.closeAdministrator() };
-			//#ifdef relacional
+			//#if relacional
 //@				out.println(Library.getFileListReplace(keywords, newWords, Constants.FORM_PATH + "UpdateEmployee.html"));
 			//#endif
 			//#ifdef norelacional
@@ -49,9 +49,8 @@ public class UpdateEmployeeSearch extends Command {
 							.errorPageAdministrator("<p>Ivalid Session! <br>You must <a href=\""
 									+ Constants.SYSTEM_LOGIN
 									+ "\">login</a> again!"));
-		}//#ifdef (relacional || norelacional) 
-//@ 		catch (FileNotFoundException e) {out.println(HTMLCode.errorPageAdministrator(e.getMessage()));}
-		//#endif
+		}
+		
 		finally {out.close();}
 	}
 }

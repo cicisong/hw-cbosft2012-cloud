@@ -22,10 +22,10 @@ public class RepositoryFactory {
 	public static AbstractRepositoryFactory getRepositoryFactory() {
 		if (instance == null) {
 			if (Constants.isPersistent()) {
-				//#ifdef relacional
+				//#if relacional
 //@					instance = new RDBRepositoryFactory(HealthWatcherFacade.getPm());//RDB
 				//#endif
-				//#ifdef norelacional
+				//#if norelacional
 //@					instance = new JDORepositoryFactory(HealthWatcherFacade.getPm());//JDO
 				//#endif
 			} else {

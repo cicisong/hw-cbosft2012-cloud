@@ -43,26 +43,25 @@ public class Login extends Command {
             	
             	request.setAuthorized(true);
                 request.put(Login.EMPLOYEE, employee);
-                //#ifdef relacional 
+               
+                //#if relacional 
 //@                	out.println(Library.getFileListReplace(keywords, newWords, Constants.FORM_PATH+"MenuEmployee.html"));
                 //#endif
-                //#ifdef norelacional
+                //#if norelacional
 //@                	out.println(Library.getFileListReplace(keywords, newWords, "MenuEmployee.html"));//Thiago alterou aqui
                 //#endif
             } else {                              
-            	//#ifdef relacional
+            	//#if relacional
 //@            		out.println(HTMLCode.errorPage("Invalid password! <br><a href=\""+Constants.SYSTEM_LOGIN+"\">Try again</a>"));
             	//#endif
-            	//#ifdef norelacional
+            	//#if norelacional
 //@            		out.println(HTMLCode.errorPage("Invalid password! <br><a href=\"Login.html\">Try again</a>"));//Thiago alterou aqui
             	//#endif
             }
         } catch (ObjectNotFoundException e) {
             out.println(HTMLCode.errorPage("Invalid login! <br><a href=\""+Constants.SYSTEM_LOGIN+"\">Try again</a>"));
-        } //#ifdef relacional
- //@       catch (FileNotFoundException e) {
- //@           out.println(HTMLCode.errorPage(e.getMessage()));}
-        //#endif
+        } 
+   
          catch (TransactionException e) {
         	out.println(HTMLCode.errorPage(e.getMessage()));
         } catch (CommunicationException e) {
