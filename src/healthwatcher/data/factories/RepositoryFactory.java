@@ -26,7 +26,7 @@ public class RepositoryFactory {
 //@					instance = new RDBRepositoryFactory(HealthWatcherFacade.getPm());//RDB
 				//#endif
 				//#ifdef norelacional
-					instance = new JDORepositoryFactory(HealthWatcherFacade.getPm());//JDO
+//@					instance = new JDORepositoryFactory(HealthWatcherFacade.getPm());//JDO
 				//#endif
 			} else {
 				instance = new ArrayRepositoryFactory();

@@ -39,7 +39,7 @@ public class UpdateEmployeeSearch extends Command {
 //@				out.println(Library.getFileListReplace(keywords, newWords, Constants.FORM_PATH + "UpdateEmployee.html"));
 			//#endif
 			//#ifdef norelacional
-				out.println(Library.getFileListReplace(keywords, newWords,"UpdateEmployee.html"));//Thiago alterou aqui
+//@				out.println(Library.getFileListReplace(keywords, newWords,"UpdateEmployee.html"));//Thiago alterou aqui
 			//#endif
 			
 
@@ -49,8 +49,9 @@ public class UpdateEmployeeSearch extends Command {
 							.errorPageAdministrator("<p>Ivalid Session! <br>You must <a href=\""
 									+ Constants.SYSTEM_LOGIN
 									+ "\">login</a> again!"));
-		} catch (FileNotFoundException e) {
-			out.println(HTMLCode.errorPageAdministrator(e.getMessage()));
-		}finally {out.close();}
+		}//#ifdef (relacional || norelacional) 
+//@ 		catch (FileNotFoundException e) {out.println(HTMLCode.errorPageAdministrator(e.getMessage()));}
+		//#endif
+		finally {out.close();}
 	}
 }
