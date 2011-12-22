@@ -35,9 +35,13 @@ public class UpdateEmployeeSearch extends Command {
 			String[] newWords = { employee.getLogin(), employee.getName(),
 					Constants.SERVLET_SERVER_PATH,
 					HTMLCode.closeAdministrator() };
-
-			out.println(Library.getFileListReplace(keywords, newWords,
-					/*Constants.FORM_PATH + */"UpdateEmployee.html"));//Thiago alterou aqui
+			//#ifdef relacional
+//@				out.println(Library.getFileListReplace(keywords, newWords, Constants.FORM_PATH + "UpdateEmployee.html"));
+			//#endif
+			//#ifdef norelacional
+				out.println(Library.getFileListReplace(keywords, newWords,"UpdateEmployee.html"));//Thiago alterou aqui
+			//#endif
+			
 
 		} catch (InvalidSessionException e) {
 			out
