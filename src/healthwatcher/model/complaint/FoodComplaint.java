@@ -15,7 +15,7 @@ import javax.jdo.annotations.PrimaryKey;
 import lib.util.Date;
 
 @SuppressWarnings("serial")
-@PersistenceCapable(identityType = IdentityType.APPLICATION, detachable = "true")
+@PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class FoodComplaint extends Complaint {
 
 	@PrimaryKey
@@ -33,6 +33,8 @@ public class FoodComplaint extends Complaint {
 	
     @Persistent(serialized = "true")
 	private Address complainerAddress;
+    
+    //private Employee attendant;
     
     @Persistent
     private String description; 
@@ -105,6 +107,15 @@ public class FoodComplaint extends Complaint {
 	public Address obterEnderecoSolicitante(){
 		return this.complainerAddress;
 	}
+	
+	/*public void addAttendant(Employee atendente){
+		this.attendant = atendente;
+	}
+
+	public Employee obterAttendant() {
+		return this.attendant;
+	}*/
+
 	
 	public Address getEnderecoDoente() {
 		return state.getEnderecoDoente();

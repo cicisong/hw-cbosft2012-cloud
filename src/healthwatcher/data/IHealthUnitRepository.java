@@ -21,6 +21,8 @@ public interface IHealthUnitRepository {
 
 	public HealthUnit search(Long code) throws ObjectNotFoundException, RepositoryException;
 
+	public HealthUnit partialSearch(Long codigo) throws RepositoryException, ObjectNotFoundException; //Thiago incluiu aqui
+	
 	public IteratorDsk getHealthUnitList() throws ObjectNotFoundException, RepositoryException;
 
 	public IteratorDsk getPartialHealthUnitList() throws ObjectNotFoundException,

@@ -34,8 +34,8 @@ public class AnimalComplaint extends Complaint {
 	@Persistent
 	private String observation;
 
-	@Persistent(serialized = "true")
-	private Employee attendant;
+	//Persistent(serialized = "true")
+	//private Employee attendant;
 
 	@Persistent
 	private long timestamp;
@@ -98,13 +98,13 @@ public class AnimalComplaint extends Complaint {
 		return this.observation;
 	}
 
-	public void addAttendant(Employee atendente){
+	/*public void addAttendant(Employee atendente){
 		this.attendant = atendente;
 	}
 
 	public Employee obterAttendant() {
 		return this.attendant;
-	}
+	}*/
 
 	public void addEnderecoSolicitante(Address endereco){
 		this.complainerAddress = endereco;

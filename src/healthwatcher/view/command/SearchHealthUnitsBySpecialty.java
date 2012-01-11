@@ -27,7 +27,7 @@ public class SearchHealthUnitsBySpecialty extends Command {
 		PrintWriter out = response.getWriter();
 
         Long codigoEsp =  Long.parseLong(request.getInput("codEspecialidade"));
-
+        System.out.println("Codigo espe: "+codigoEsp);
         try {
         	IteratorDsk repUS = facade.searchHealthUnitsBySpeciality(codigoEsp);
 

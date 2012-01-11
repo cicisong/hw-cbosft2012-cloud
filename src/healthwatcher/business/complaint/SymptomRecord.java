@@ -23,14 +23,27 @@ public class SymptomRecord {
 	public void insert(Symptom symptom) throws RepositoryException, ObjectAlreadyInsertedException,
 			ObjectNotValidException {
 		try {
-			manager.beginExecution("" + symptom.getId());
-			if (rep.exists(symptom.getId())) {
+			//#if relacional
+//@			manager.beginExecution("" + symptom.getId());
+//@			if (rep.exists(symptom.getId())) {
+//@				throw new ObjectAlreadyInsertedException(ExceptionMessages.EXC_JA_EXISTE);
+//@			} else {
+//@				rep.insert(symptom);
+//@			}
+			//#endif
+			
+			//#if norelacional
+			if (rep.exists((long) symptom.getCode())) {
 				throw new ObjectAlreadyInsertedException(ExceptionMessages.EXC_JA_EXISTE);
 			} else {
-				rep.insert(symptom);
+				this.rep.insert(symptom);
 			}
+			//#endif
+			
 		} finally {
-			manager.endExecution("" + symptom.getId());
+			//#if relacional
+//@			manager.endExecution("" + symptom.getId());
+			//#endif
 		}
 	}
 

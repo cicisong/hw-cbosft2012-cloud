@@ -74,6 +74,7 @@ public abstract class Complaint implements Serializable, Subject {
 	}
 
 	public void setCodigo(Long codigo) {
+		System.out.println(codigo);
 		state.setCode(codigo);
 	}
 

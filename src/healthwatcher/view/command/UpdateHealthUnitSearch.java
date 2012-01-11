@@ -40,7 +40,9 @@ public class UpdateHealthUnitSearch extends Command {
             Long numUS = (new Long(request.getInput("numUS"))).longValue();
             
             HealthUnit unit = facade.searchHealthUnit(numUS);
-            unit.addObserver(facade);
+            //#if relacional
+//@            unit.addObserver(facade); //thiago alterou aqui
+            //#endif
             
             request.put(UpdateHealthUnitSearch.HEALTH_UNIT, unit);
             

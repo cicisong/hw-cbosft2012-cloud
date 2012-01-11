@@ -34,7 +34,9 @@ public class UpdateMedicalSpecialitySearch extends Command {
             Long specialityCode = (new Long(request.getInput("specialityCode"))).longValue();
             
             MedicalSpeciality speciality = facade.searchSpecialitiesByCode(specialityCode);
-            speciality.addObserver(facade);
+            //#if relacional
+//@            speciality.addObserver(facade); //thiago alterou aqui
+            //#endif
             
             request.put(SPECIALITY, speciality);
             

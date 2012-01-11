@@ -1,0 +1,73 @@
+<html>
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<title>Health-Watcher - Insert Medical Speciality</title>
+</head>
+<body>
+<script language="javascript">
+<!--
+
+   function ehNumero( field ) 
+   {
+      for( var i = 0; i < field.length; i++ ) {
+         c = field.charAt( i );
+         if ( ( escape( c ) < "0" ) || ( escape( c ) > "9" ) ) {
+            return false;
+         }
+      }
+      return true;
+   }
+	 
+
+   function submeterDados() 
+   {
+			
+      var f = document.formMedicalSpeciality;
+      
+      if(f.descricaoMedica.value == "")
+      {
+      	alert("Type the description!");
+        f.descricaoMedica.select();
+        f.descricaoMedica.focus();
+        return;
+      
+      }
+      
+      if(f.codeSpeciality.value != "")
+      {
+          if(!ehNumero(f.codeSpeciality.value)){
+			alert("The code of medical speciality must be a number!")
+			f.codeSpeciality.select();
+			f.codeSpeciality.focus();
+			return;
+          }
+      }
+      else {
+         alert("Type the code of speciality!");
+         f.codeSpeciality.select();
+         f.codeSpeciality.focus();
+         return;
+      }
+      
+      f.operation.value = "InsertMedicalSpeciality";
+      f.submit();
+   }
+
+//-->
+</script>
+
+<h1>Medical Speciality</h1>
+
+<form method="POST" action="HWServlet" name="formMedicalSpeciality">
+  <input type="hidden" name="operation" values="InsertMedicalSpeciality">
+  <p>Medical Speciality Code: <input type="text" name="codeSpeciality" size="41"></p>
+  <p>Medical Speciality Description:</p>
+  <p><textarea rows="6" name="descricaoMedica" cols="63"></textarea></p>
+  <div align="center"><center><p><input type="button" value="Insert" name="bt1"
+  onClick="javascript:submeterDados();"> <input type="reset" value="Clear" name="bt2"> </p>
+  </center></div>
+</form>
+<p><center><a href="index.html">Main menu</a><p><small>Health-Watcher - 2004</small></center>
+
+</body>
+</html>

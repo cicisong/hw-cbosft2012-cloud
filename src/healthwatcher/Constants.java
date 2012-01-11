@@ -13,7 +13,8 @@ public class Constants {
 	public static final String DB_DRIVER = "com.mysql.jdbc.Driver"; //"sun.jdbc.odbc.JdbcOdbcDriver";
 
 	// RMI Configuration
-	public static final String SERVER_NAME = "localhost";
+	//public static final String SERVER_NAME = "testehealthwather.appspot.com";
+	public static final String SERVER_NAME = "localhost:8888/";
 	public static final String SYSTEM_NAME = "HealthWatcher";
 
 	// SERVLETS Configuration
@@ -22,11 +23,12 @@ public class Constants {
 	public static final String FORM_PATH = "/opt/tomcat/webapps/servlet/evolution/";
 	//public static final String FORM_PATH = "c:\\eclipse\\workspace\\HealthWatcherOO_1_Base\\web\\healthwatcher\\formularios\\";	
 	
-	//public static final String SERVLET_SERVER_PATH = "localhost:8080/healthwatcher";
-	public static final String SERVLET_SERVER_PATH = "localhost:8080/servlet/healthwatcher.view.servlets.";
+	//public static final String SERVLET_SERVER_PATH = "testehealthwather.appspot.com/";
+	public static final String SERVLET_SERVER_PATH = "localhost:8888/";
+	//public static final String SERVLET_SERVER_PATH = "localhost:8080/servlet/healthwatcher.view.servlets.";
 
 	//public static final String SYSTEM_ROOT = "http://localhost:8080/healthwatcher/";
-	public static final String SYSTEM_ROOT = "http://" + SERVLET_SERVER_PATH + "ServletWebServer?file=";
+	public static final String SYSTEM_ROOT = "http://" + SERVLET_SERVER_PATH;
 
 	//public static final String SYSTEM_ROOT = "http://localhost:8080/healthwatcher/";
 	public static final String SYSTEM_ACTION = "http://" + SERVLET_SERVER_PATH + "HWServlet";

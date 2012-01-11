@@ -40,7 +40,7 @@ public class ServletWebServer extends HWServlet {
 		}
         
         try {
-			out.println(Library.getFileListReplace(keywords, newWords, Constants.FORM_PATH+file));
+			out.println(Library.getFileListReplace(keywords, newWords, file));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,7 +64,7 @@ public class ServletWebServer extends HWServlet {
 		}
         
         try {
-			out.println(Library.getFileListReplace(keywords, newWords, Constants.FORM_PATH+file));
+			out.println(Library.getFileListReplace(keywords, newWords, file));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -25,6 +25,7 @@ public class ComplaintStateClosed extends ComplaintState  {
 	public void setAttendant(Employee atend, Complaint complaint) {
     }
     public void setCode(Long cod) {
+    	System.out.println("fechada: "+cod);
     }
     public void setMedicalOpinionDate(Date data) {
     }

@@ -87,7 +87,7 @@ public class InsertFoodComplaint extends Command {
 							+ "<p> <h2> Save the complaint number: " + codigo
 							+ "</h2> </p>"));
 
-			out.println(HTMLCode.close());
+			//out.println(HTMLCode.close()); //Thiago alterou aqui pra não ficar repetido.
 			out.close();   
 
 			

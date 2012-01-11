@@ -49,7 +49,7 @@ public class UpdateHealthUnitList extends Command {
 	                do {
 	                    tp = (HealthUnit) repTP.next();
 	                    out.println("<option value=\""      +
-	                                tp.getId() + "\"> " +
+	                                tp.getId() + "\"> " + 
 	                                tp.getDescription()           +
 	                                " </OPTION>");
 	                } while (repTP.hasNext());

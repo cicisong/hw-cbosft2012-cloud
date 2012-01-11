@@ -28,11 +28,24 @@ public class Symptom implements java.io.Serializable, Subject {
 
 	@Persistent
 	private String description;
+	
+	@Persistent
+	private int teste; //codigo pra linkar a classe diseaseType
 
-	private List subscribers = new ArrayList();
+	//#if relacional
+//@	private List subscribers = new ArrayList();
+	//#endif
 	
 	public Symptom(String descricao) {
 		this.description = descricao;
+	}
+	
+	public void setCode(int codigo){	
+		this.teste = codigo;
+	}
+	
+	public int getCode(){
+		return this.teste;
 	}
 
 	public Long getId() {
@@ -49,33 +62,57 @@ public class Symptom implements java.io.Serializable, Subject {
 	
 	public void setDescription(String description) {
 		this.description = description;
-		notifyObservers();
+		//#if relacional
+//@		notifyObservers();
+		//#endif
 	}
 
+	//#if norelacional
+	@Override
 	public void addObserver(Observer observer) {
-		subscribers.add(observer);
+		// TODO Auto-generated method stub
+		
 	}
 
+	@Override
 	public void removeObserver(Observer observer) {
-		subscribers.remove(observer);
+		// TODO Auto-generated method stub
+		
 	}
 
+	@Override
 	public void notifyObservers() {
-		for (Iterator it = subscribers.iterator(); it.hasNext();) {
-			Observer observer = (Observer) it.next();
-			try {
-				observer.notify(this);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			} catch (ObjectNotValidException e) {
-				e.printStackTrace();
-			} catch (ObjectNotFoundException e) {
-				e.printStackTrace();
-			} catch (TransactionException e) {
-				e.printStackTrace();
-			} catch (RepositoryException e) {
-				e.printStackTrace();
-			}
-		}
-	}	
+		// TODO Auto-generated method stub
+		
+	}
+	//#endif
+
+	//#if relacional
+//@	public void addObserver(Observer observer) {
+//@		subscribers.add(observer);
+//@	}
+//@
+//@	public void removeObserver(Observer observer) {
+//@		subscribers.remove(observer);
+//@	}
+//@
+//@	public void notifyObservers() {
+//@		for (Iterator it = subscribers.iterator(); it.hasNext();) {
+//@			Observer observer = (Observer) it.next();
+//@			try {
+//@				observer.notify(this);
+//@			} catch (RemoteException e) {
+//@				e.printStackTrace();
+//@			} catch (ObjectNotValidException e) {
+//@				e.printStackTrace();
+//@			} catch (ObjectNotFoundException e) {
+//@				e.printStackTrace();
+//@			} catch (TransactionException e) {
+//@				e.printStackTrace();
+//@			} catch (RepositoryException e) {
+//@				e.printStackTrace();
+//@			}
+//@		}
+//@	}
+	//#endif
 }

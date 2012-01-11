@@ -41,9 +41,15 @@ public class InsertDiseaseType extends Command {
 			
 			// TODO: FALTA INCLUIR OS SINTOMAS JUNTOS
 			diseaseType = new DiseaseType(name, description, manifestacao, duration, null);
-			diseaseType.setId(Long.parseLong(code));
+			//#if relacional
+//@			diseaseType.setId(Long.parseLong(code));
+			//#endif
+			//#if norelacional
+			diseaseType.setCode(Integer.parseInt(code));
+			//#endif
+			
 			facade.insert(diseaseType);
-        
+
             out.println(HTMLCode.htmlPageAdministrator("Operation executed", "DiseaseType inserted"));
             out.close();
         } catch (ObjectAlreadyInsertedException e) {

@@ -27,37 +27,44 @@ public class GetDataForSearchByDiseaseType extends Command {
 		try {
 			// The facade call must be the first thing, to be able to recover without spoiling the out
 			IteratorDsk repTP = facade.getDiseaseTypeList();
-			
-		out.println(HTMLCode.open("Queries - Disease information"));
-		out.println("<body><h1>Queries:<br>Querie about diseases</h1>");
-		out.println("<p>Choose a disease: </p>");
-		out
-				.println("<form method=\"POST\" action=\""+Constants.SYSTEM_ACTION+"?operation=SearchDiseaseData\">");
+
+			out.println(HTMLCode.open("Queries - Disease information"));
+			out.println("<body><h1>Queries:<br>Querie about diseases</h1>");
+			out.println("<p>Choose a disease: </p>");
+			out
+			.println("<form method=\"POST\" action=\""+Constants.SYSTEM_ACTION+"?operation=SearchDiseaseData\">");
 
 			out
-					.println("<div align=\"center\"><center><p><select name=\"codTipoDoenca\" size=\"1\">");
-			
+			.println("<div align=\"center\"><center><p><select name=\"codTipoDoenca\" size=\"1\">");
+
 			if (repTP == null || !repTP.hasNext()) {
 				out.println("</select></p></center></div>");
 				out
-						.println("<p><font color=\"red\"><b> There isn't diseases registered.</b></font></p>");
+				.println("<p><font color=\"red\"><b> There isn't diseases registered.</b></font></p>");
 			} else {
 				DiseaseType tp;
 				do {
 					tp = (DiseaseType) repTP.next();
-
-					out.println("<option value=\"" + tp.getId() + "\"> "
+					
+					//#if relacional
+//@					out.println("<option value=\"" + tp.getId() + "\"> "
+//@							+ tp.getName() + " </OPTION>");
+					//#endif
+					
+					//#if norelacional
+					out.println("<option value=\"" + tp.getCode() + "\"> " //thiago alterou aqui
 							+ tp.getName() + " </OPTION>");
+					//#endif
 				} while (repTP.hasNext());
 				repTP.close();
 
 				out.println("</select></p></center></div>");
 				out
-						.println("<div align=\"center\"><center><p><input type=\"submit\" value=\"Consultar\" name=\"B1\"></p></center></div></form>");
+				.println("<div align=\"center\"><center><p><input type=\"submit\" value=\"Consultar\" name=\"B1\"></p></center></div></form>");
 			}
 			out.println(HTMLCode.closeQueries());
 			out.close();
-			
+
 		} catch (ObjectNotFoundException e) {
 			out.println(HTMLCode
 					.errorPageQueries("There isn't registered diseases"));

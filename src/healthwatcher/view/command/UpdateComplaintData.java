@@ -41,9 +41,10 @@ public class UpdateComplaintData extends Command {
 					.get(Login.EMPLOYEE);
 			q.setAtendente(employee);
 			q.setSituacao(Situation.QUEIXA_FECHADA);
+			facade.updateComplaint(q); //Thiago acrescentou aqui
 
 			out.println(HTMLCode.htmlPageAdministrator("Operation executed",
-					"Complaint updated" + "<P>" + obsQueixa + "</P>"));
+					"Complaint updated"));
 		} catch (Exception e) {
 			out.println(lib.util.HTMLCode
 					.errorPageAdministrator(e.getMessage()));

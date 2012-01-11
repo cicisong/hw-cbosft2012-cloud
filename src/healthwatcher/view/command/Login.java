@@ -36,10 +36,12 @@ public class Login extends Command {
         String password = request.getInput("password");        
 
         try {
-            Employee employee = facade.searchEmployee(login);
-            
+        	Employee employee = new Employee("admin", "admin", "admin");// facade.searchEmployee(login);
+           
             if (employee.validatePassword(password)) {
-            	//employee.addObserver(facade); //Thiago alterou aqui
+            	//#if relacional
+//@            	employee.addObserver(facade); //Thiago alterou aqui
+            	//#endif
             	
             	request.setAuthorized(true);
                 request.put(Login.EMPLOYEE, employee);
@@ -48,24 +50,24 @@ public class Login extends Command {
 //@                	out.println(Library.getFileListReplace(keywords, newWords, Constants.FORM_PATH+"MenuEmployee.html"));
                 //#endif
                 //#if norelacional
-//@                	out.println(Library.getFileListReplace(keywords, newWords, "MenuEmployee.html"));//Thiago alterou aqui
+                	out.println(Library.getFileListReplace(keywords, newWords, "MenuEmployee.html"));//Thiago alterou aqui
                 //#endif
             } else {                              
             	//#if relacional
 //@            		out.println(HTMLCode.errorPage("Invalid password! <br><a href=\""+Constants.SYSTEM_LOGIN+"\">Try again</a>"));
             	//#endif
             	//#if norelacional
-//@            		out.println(HTMLCode.errorPage("Invalid password! <br><a href=\"Login.html\">Try again</a>"));//Thiago alterou aqui
+            		out.println(HTMLCode.errorPage("Invalid password! <br><a href=\"Login.html\">Try again</a>"));//Thiago alterou aqui
             	//#endif
             }
-        } catch (ObjectNotFoundException e) {
-            out.println(HTMLCode.errorPage("Invalid login! <br><a href=\""+Constants.SYSTEM_LOGIN+"\">Try again</a>"));
-        } 
-   
-         catch (TransactionException e) {
-        	out.println(HTMLCode.errorPage(e.getMessage()));
-        } catch (CommunicationException e) {
-			throw new FacadeUnavailableException();
+        //} catch (ObjectNotFoundException e) {
+        //    out.println(HTMLCode.errorPage("Invalid login! <br><a href=\""+Constants.SYSTEM_LOGIN+"\">Try again</a>"));
+        //} catch (FileNotFoundException e) {
+        //    out.println(HTMLCode.errorPage(e.getMessage()));
+        //} catch (TransactionException e) {
+        //	out.println(HTMLCode.errorPage(e.getMessage()));
+        //} catch (CommunicationException e) {
+		//	throw new FacadeUnavailableException();
 		} catch (Exception e) {
         	out.println(HTMLCode.errorPage(e.getMessage()));//null
 		} finally{

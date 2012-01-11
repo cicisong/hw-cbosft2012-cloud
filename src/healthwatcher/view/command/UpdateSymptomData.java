@@ -28,6 +28,7 @@ public class UpdateSymptomData extends Command {
             String descricao = request.getInput("descricao");            
             
             symptom.setDescription(descricao);
+        	facade.updateSymptom(symptom);
         	
             out.println(HTMLCode.htmlPageAdministrator("Operation executed", "Symptom updated"));
 

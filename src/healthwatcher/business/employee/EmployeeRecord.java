@@ -25,13 +25,17 @@ public class EmployeeRecord {
 
 	public void insert(Employee employee) throws ObjectNotValidException,
 			ObjectAlreadyInsertedException, ObjectNotValidException, RepositoryException {
-		manager.beginExecution(employee.getLogin());
+		//#if relacional
+//@		manager.beginExecution(employee.getLogin());
+		//#endif
 		if (employeeRepository.exists(employee.getLogin())) {
 			throw new ObjectAlreadyInsertedException(ExceptionMessages.EXC_JA_EXISTE);
 		} else {
 			employeeRepository.insert(employee);
 		}
-		manager.endExecution(employee.getLogin());
+		//#if relacional
+//@		manager.endExecution(employee.getLogin());
+		//#endif
 	}
 
 	public void update(Employee employee) throws ObjectNotValidException, ObjectNotFoundException,

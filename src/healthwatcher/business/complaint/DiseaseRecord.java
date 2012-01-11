@@ -32,14 +32,28 @@ public class DiseaseRecord {
 	public void insert(DiseaseType diseaseType) throws RepositoryException, ObjectAlreadyInsertedException,
 		ObjectNotValidException {
 		try { 
-			manager.beginExecution("" + diseaseType.getId());
-			if (diseaseRep.exists(diseaseType.getId())) {
+			//#if relacional
+//@			manager.beginExecution("" + diseaseType.getId());
+//@			
+//@			if (diseaseRep.exists(diseaseType.getId())) {
+//@				throw new ObjectAlreadyInsertedException(ExceptionMessages.EXC_JA_EXISTE);
+//@			} else {
+//@				this.diseaseRep.insert(diseaseType);
+//@			}
+			//#endif
+			
+			//#if norelacional
+			if (diseaseRep.exists((long) diseaseType.getCode())) {
 				throw new ObjectAlreadyInsertedException(ExceptionMessages.EXC_JA_EXISTE);
 			} else {
 				this.diseaseRep.insert(diseaseType);
 			}
+			//#endif
+
 		}finally {			
-			manager.endExecution("" + diseaseType.getId());			
+			//#if relacional
+//@			manager.endExecution("" + diseaseType.getId());
+			//#endif
 		}		
 	}
 }

@@ -33,11 +33,19 @@ public class InsertMedicalSpeciality extends Command {
             }            
 
             //Complaint Normal
-			String code = request.getInput("code");
-			String description = request.getInput("description");			
-			
+			String code = request.getInput("codeSpeciality");
+			String description = request.getInput("descricaoMedica");			
+			System.out.println("asdfas!! "+description);
 			speciality = new MedicalSpeciality(description);
-			speciality.setId(Long.parseLong(code));
+			
+			//#if norelacional
+			speciality.setCode(Integer.parseInt(code)); //Thiago alterou aqui
+			//#endif
+			
+			//#if relacional
+//@			speciality.setId(Long.parseLong(code));
+			//#endif
+			
 			facade.insert(speciality);
         
             out.println(HTMLCode.htmlPageAdministrator("Operation executed", "MedicalSpecialty inserted"));

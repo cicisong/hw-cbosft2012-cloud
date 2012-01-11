@@ -32,8 +32,8 @@ public class UpdateHealthUnitData extends Command {
         	unit = (HealthUnit) request.get(UpdateHealthUnitSearch.HEALTH_UNIT);                        
             
             String descricao = request.getInput("descricao");            
-            
             unit.setDescription(descricao);
+            facade.updateHealthUnit(unit);
         	
             out.println(HTMLCode.htmlPageAdministrator("Operation executed", "Health Unit updated"));
 

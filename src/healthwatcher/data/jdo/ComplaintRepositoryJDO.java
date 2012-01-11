@@ -31,6 +31,7 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 	private IPersistenceMechanism mp;
 
 	private AddressRepositoryJDO addressRep;
+	private EmployeeRepositoryJDO employeeRep;
 
 	private static final int FOOD_COMPLAINT = 1;
 
@@ -41,40 +42,34 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 	public ComplaintRepositoryJDO(IPersistenceMechanism mp) {
 		this.mp = mp;
 		addressRep = new AddressRepositoryJDO(mp);
+		employeeRep = new EmployeeRepositoryJDO(mp);
 	}
 
 	public void update(Complaint complaint) throws RepositoryException, ObjectNotFoundException,
 	ObjectNotValidException {
-		
-		PersistenceManager pm = (PersistenceManager) mp.getCommunicationChannel();
-		String descricao = complaint.getDescricao();
-		String email = complaint.getEmail();
-		String observacao = complaint.getObservacao();
-		Employee atendente = complaint.getAtendente();
-		Date dataParecer = complaint.getDataParecer();
-		Date dataQueixa = complaint.getDataQueixa();
-		Address endereco = complaint.getEnderecoSolicitante();
-		long timestamp = complaint.getTimestamp();
 
+		PersistenceManager pm = (PersistenceManager) this.mp.getCommunicationChannel();
 		try {
-			pm.currentTransaction().begin();
-			// Nos nao temos uma referencia para o produto selecionado.
-			// Entao temos que procura-lo primeiro,
-			complaint = pm.getObjectById(Complaint.class, complaint.getCodigo());
-			complaint.setDescricao(descricao);
-			complaint.setEmail(email);
-			complaint.setObservacao(observacao);
-			complaint.setAtendente(atendente);
-			complaint.setDataParecer(dataParecer);
-			complaint.setDataQueixa(dataQueixa);
-			complaint.setEnderecoSolicitante(endereco);
-			complaint.setTimestamp(timestamp);
-
-			pm.makePersistent(complaint);
-			pm.currentTransaction().commit();
-		} catch (Exception ex) {
-			pm.currentTransaction().rollback();
-			throw new RuntimeException(ex);
+			if (complaint instanceof SpecialComplaint) {
+				SpecialComplaint special = pm.getObjectById(SpecialComplaint.class, complaint.getCodigo());
+				special.setObservacao(complaint.getObservacao());
+				special.setAtendente(complaint.getAtendente());
+				special.setDataParecer(complaint.getDataParecer());
+				special.setSituacao(complaint.getSituacao());
+			}else if (complaint instanceof FoodComplaint){
+				FoodComplaint food =  pm.getObjectById(FoodComplaint.class, complaint.getCodigo());
+				food.setObservacao(complaint.getObservacao());
+				food.setAtendente(complaint.getAtendente());
+				food.setDataParecer(complaint.getDataParecer());
+				food.setSituacao(complaint.getSituacao());
+			}else if (complaint instanceof AnimalComplaint){
+				AnimalComplaint animal = pm.getObjectById(AnimalComplaint.class, complaint.getCodigo());
+				animal.setObservacao(complaint.getObservacao());
+				animal.setAtendente(complaint.getAtendente());
+				animal.setDataParecer(complaint.getDataParecer());
+				animal.setSituacao(complaint.getSituacao());
+			}
+			
 		} finally {
 			pm.close();
 		}
@@ -82,11 +77,12 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 
 	private void deepInsertFood(FoodComplaint complaint) throws 
 	RepositoryException, ObjectAlreadyInsertedException, ObjectNotValidException {
-		
+
 		complaint.addEmail(complaint.getEmail());
 		complaint.addDescricao(complaint.getDescricao());
 		complaint.addObservation(complaint.getObservacao());
 		complaint.addEnderecoSolicitante(complaint.getEnderecoSolicitante());
+		//complaint.addAttendant(complaint.getAtendente());
 		complaint.addSolicitante(complaint.getSolicitante());
 
 		insertFood(complaint);
@@ -94,27 +90,28 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 
 	private void deepInsertAnimal(AnimalComplaint complaint) throws 
 	RepositoryException, ObjectAlreadyInsertedException, ObjectNotValidException {
-		
+
 		complaint.addEmail(complaint.getEmail());
 		complaint.addDescricao(complaint.getDescricao());
 		complaint.addEnderecoSolicitante(complaint.getEnderecoSolicitante());
-		complaint.addAttendant(complaint.getAtendente());
+		//complaint.addAttendant(complaint.getAtendente());
 		complaint.addObservation(complaint.getObservacao());
 		complaint.addSolicitante(complaint.getSolicitante());
 		complaint.addTimestamp(complaint.getTimestamp());
-		
+
 		insertAnimal(complaint);
 	}
-	
+
 	private void deepInsertSpecial(SpecialComplaint complaint) throws 
 	RepositoryException, ObjectAlreadyInsertedException, ObjectNotValidException {
-		
+
 		complaint.addEmail(complaint.getEmail());
 		complaint.addDescricao(complaint.getDescricao());
 		complaint.addObservation(complaint.getObservacao());
 		complaint.addEnderecoSolicitante(complaint.getEnderecoSolicitante());
+		//complaint.addAttendant(complaint.getAtendente());
 		complaint.addSolicitante(complaint.getSolicitante());
-		
+
 		insertSpecial(complaint);
 	}
 
@@ -182,10 +179,10 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 
 	public boolean exists(Long code) throws RepositoryException {
 		boolean response = false;
-		//String consulta = "select id from "+Complaint.class.getName();
 
 		return response;
 	}
+
 	public Long insert(Complaint complaint) throws ObjectAlreadyInsertedException,
 	RepositoryException, ObjectNotValidException {
 		try {
@@ -196,20 +193,19 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 				if (complaint instanceof SpecialComplaint) {
 					SpecialComplaint special = (SpecialComplaint) complaint;
 					deepInsertSpecial(special);
-					complaint.setSituacao(SPECIAL_COMPLAINT);
+					complaint.setSituacao(1);
 					complaint.setCodigo(special.getId());
-					System.out.println(special.getId()+" = "+complaint.getCodigo()+"\n");
-					
+
 				} else if (complaint instanceof FoodComplaint) {
 					FoodComplaint food = (FoodComplaint) complaint;
 					deepInsertFood(food);
-					complaint.setSituacao(FOOD_COMPLAINT);
+					complaint.setSituacao(1);
 					complaint.setCodigo(food.getId());
-					
+
 				} else if (complaint instanceof AnimalComplaint) {
 					AnimalComplaint animal = (AnimalComplaint) complaint;
 					deepInsertAnimal(animal);
-					complaint.setSituacao(ANIMAL_COMPLAINT);
+					complaint.setSituacao(1);
 					complaint.setCodigo(animal.getId());
 				}
 			} else {
@@ -222,8 +218,6 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 		updateTimestamp(complaint.getTimestamp() + "", "SCBS_queixa", complaint.getCodigo() + "");
 		return complaint.getCodigo();
 	}
-
-	
 
 	private void insertFood(FoodComplaint complaint) throws RepositoryException {
 		PersistenceManager pm = (PersistenceManager) mp.getCommunicationChannel();
@@ -276,7 +270,6 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 			// Start the transaction
 			tx.begin();
 			pm.makePersistent(complaint);
-			System.out.println("Complaint ID: "+complaint.getId());
 			tx.commit();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -346,13 +339,13 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 		q.setTimestamp(timestamp);
 		return q;
 	}
-*/
+	 */
 	public Complaint search(Long code) throws RepositoryException, ObjectNotFoundException {
 
 		PersistenceManager pm = (PersistenceManager) mp.getCommunicationChannel();
-		pm.setDetachAllOnCommit(true);
+		//pm.setDetachAllOnCommit(true);
 		Complaint obj = null;
-		
+
 		Long id = null;
 		String email = null;
 		String descricao = null;
@@ -360,13 +353,14 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 		String solicitante = null;
 		String observation = null;
 		Employee attendant = null;
+		int situacao = 1;
 		long timestamp = 0;
-		
+
 		try{
-			
+
 			String queryFood = ("select from "+FoodComplaint.class.getName()+" where id == "+code+"");
 			List<FoodComplaint> food = (List<FoodComplaint>) pm.newQuery(queryFood).execute();
-			
+
 			String queryAnimal = ("select from "+AnimalComplaint.class.getName()+" where id == "+code+"");
 			List<AnimalComplaint> animal = (List<AnimalComplaint>) pm.newQuery(queryAnimal).execute();
 
@@ -380,11 +374,12 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 				enderecoSolicitante = animal.get(0).obterEnderecoSolicitante();
 				solicitante = animal.get(0).obterSolicitante();
 				observation = animal.get(0).obterObservation();
-				attendant = animal.get(0).obterAttendant();
+				//attendant = animal.get(0).obterAttendant();
 				timestamp = animal.get(0).obterTimestamp();
-			
+				situacao = animal.get(0).getSituacao();
+
 				obj = animal.get(0);
-				
+
 			} else if(!food.isEmpty()){
 				id = food.get(0).getId();
 				solicitante = food.get(0).obterSolicitante();
@@ -392,9 +387,11 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 				descricao = food.get(0).obterDescricao();
 				observation = food.get(0).obterObservation();
 				enderecoSolicitante = food.get(0).obterEnderecoSolicitante();
-				
+				//attendant = food.get(0).obterAttendant();
+				situacao = food.get(0).getSituacao();
+
 				obj = food.get(0);
-			
+
 			} else if (!special.isEmpty()){
 				id = special.get(0).getId();
 				solicitante = special.get(0).obterSolicitante();
@@ -402,6 +399,8 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 				descricao = special.get(0).obterDescricao();
 				observation = special.get(0).obterObservation();
 				enderecoSolicitante = special.get(0).obterEnderecoSolicitante();
+				//attendant = special.get(0).obterAttendant();
+				situacao = special.get(0).getSituacao();
 
 				obj = special.get(0);
 			}
@@ -409,7 +408,7 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		obj.setCodigo(id);
 		obj.setEmail(email);
 		obj.setDescricao(descricao);
@@ -418,7 +417,8 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 		obj.setObservacao(observation);
 		obj.setAtendente(attendant);
 		obj.setTimestamp(timestamp);
-		
+		obj.setSituacao(situacao);
+
 		return obj;
 
 	}
@@ -437,8 +437,82 @@ public class ComplaintRepositoryJDO implements IComplaintRepository {
 	}
 
 	public IteratorDsk getComplaintList() throws ObjectNotFoundException, RepositoryException {
+		List<Complaint> cList = new ArrayList<Complaint>();
+		PersistenceManager pm = (PersistenceManager) this.mp.getCommunicationChannel();		
 
-		List cList = new ArrayList();
+		Complaint complaint = null;
+
+		try {
+
+			String queryFood = ("select id from "+FoodComplaint.class.getName());
+			List<Long> food = (List<Long>) pm.newQuery(queryFood).execute();
+
+			String queryAnimal = ("select id from "+AnimalComplaint.class.getName());
+			List<Long> animal = (List<Long>) pm.newQuery(queryAnimal).execute();
+
+			String querySpecial = ("select id from "+SpecialComplaint.class.getName());
+			List<Long> special = (List<Long>) pm.newQuery(querySpecial).execute();
+
+			if (food.isEmpty() && animal.isEmpty() && special.isEmpty()) {
+				throw new ObjectNotFoundException(ExceptionMessages.EXC_FALHA_PROCURA);
+			}
+
+			if(!food.isEmpty()){
+				complaint = search(food.get(0));
+				cList.add(complaint);
+				try {
+					food.remove(0);
+				} catch (UnsupportedOperationException uoe) {
+					food = new ArrayList<Long>(food);
+					food.remove(0);
+				}
+				
+				while(!food.isEmpty()){
+					complaint = search (food.get(0));
+					cList.add(complaint);
+					food.remove(0);
+				}
+			}
+			
+			if(!animal.isEmpty()){
+				complaint = search(animal.get(0));
+				cList.add(complaint);
+				try {
+					animal.remove(0);
+				} catch (UnsupportedOperationException uoe) {
+					animal = new ArrayList<Long>(animal);
+					animal.remove(0);
+				}
+				
+				while(!animal.isEmpty()){
+					complaint = search (animal.get(0));
+					cList.add(complaint);
+					animal.remove(0);
+				}
+			}
+			
+			if(!special.isEmpty()){
+				complaint = search(special.get(0));
+				cList.add(complaint);
+				try {
+					special.remove(0);
+				} catch (UnsupportedOperationException uoe) {
+					special = new ArrayList<Long>(special);
+					special.remove(0);
+				}
+				
+				while(!special.isEmpty()){
+					complaint = search (special.get(0));
+					cList.add(complaint);
+					special.remove(0);
+				}
+			}
+			
+			pm.close();
+		} catch (PersistenceMechanismException e) {
+			e.printStackTrace();
+			throw new RepositoryException("PersistenceMechanismException: " + e.getMessage());
+		}
 
 		return new ConcreteIterator(cList);
 	}

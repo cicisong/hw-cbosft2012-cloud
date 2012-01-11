@@ -33,6 +33,8 @@ public class SpecialComplaint extends Complaint {
     @Persistent(serialized = "true")
 	private Address complainerAddress;
     
+	//private Employee attendant;
+    
     @Persistent
     private String description; 
 
@@ -103,6 +105,14 @@ public class SpecialComplaint extends Complaint {
 	public String obterDescricao(){
 		return this.description;
 	}
+	
+	/*public void addAttendant(Employee atendente){
+		this.attendant = atendente;
+	}
+
+	public Employee obterAttendant() {
+		return this.attendant;
+	}*/
 	
 	public void addEnderecoSolicitante(Address endereco){
 		this.complainerAddress = endereco;

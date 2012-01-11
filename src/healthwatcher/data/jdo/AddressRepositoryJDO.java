@@ -65,9 +65,6 @@ public class AddressRepositoryJDO implements IAddressRepository {
 			pm.close();
 		}
 
-		System.out.println(
-				"O ID da nova entrada Ž: " + end.getId());
-
 		return -1;
 	}
 

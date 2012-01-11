@@ -26,10 +26,12 @@ public class SearchDiseaseData extends Command {
 
 		Long codigoTipoDoenca = Long.parseLong(request
 				.getInput("codTipoDoenca"));
-
+		
+		System.out.println(codigoTipoDoenca);
 		try {
 			DiseaseType tp = facade.searchDiseaseType(codigoTipoDoenca);
-
+			System.out.println("Descricao: "+tp.getDescription());
+			
 			out.println(HTMLCode.open("Queries - Diseases"));
 			out.println("<body><h1>Querie result<br>Disease</h1>");
 

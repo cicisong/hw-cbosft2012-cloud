@@ -36,7 +36,14 @@ public class InsertSymptom extends Command {
 			String description = request.getInput("description");			
 			
 			symptom = new Symptom(description);
-			symptom.setId(Long.parseLong(code));
+			//#if relacional
+//@			symptom.setId(Long.parseLong(code));
+			//#endif
+			
+			//#if norelacional
+			symptom.setCode(Integer.parseInt(code));
+			//#endif
+			
 			facade.insert(symptom);
         
             out.println(HTMLCode.htmlPageAdministrator("Operation executed", "Symptom inserted"));

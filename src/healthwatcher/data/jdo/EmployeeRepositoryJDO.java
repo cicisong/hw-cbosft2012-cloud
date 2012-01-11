@@ -3,10 +3,10 @@ package healthwatcher.data.jdo;
 import java.util.List;
 
 import healthwatcher.data.IEmployeeRepository;
-import healthwatcher.model.complaint.FoodComplaint;
 import healthwatcher.model.employee.Employee;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import lib.exceptions.ObjectNotFoundException;
@@ -51,6 +51,18 @@ public class EmployeeRepositoryJDO implements IEmployeeRepository {
 
 	public boolean exists(String login) throws RepositoryException {
 		boolean response = false;
+		PersistenceManager pm = (PersistenceManager) this.mp.getCommunicationChannel();
+		Query q = pm.newQuery("SELECT FROM "+Employee.class.getName()+" where login == "+login+"");
+		try {
+			List<Employee> ids = (List<Employee>) q.execute();
+			
+			if (ids.size() > 0){
+				response = true;
+			}
+			pm.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return response;
 	}
 

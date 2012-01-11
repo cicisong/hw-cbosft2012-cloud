@@ -28,9 +28,12 @@ public class DiseaseType implements java.io.Serializable {
 
 	@Persistent
 	private String duration;
+	
+	@Persistent
+	private int teste; //codigo pra linkar a classe symptom.
 
 	private List symptoms;
-
+	
 	public DiseaseType() {
 		symptoms = new ArrayList();
 	}
@@ -46,6 +49,14 @@ public class DiseaseType implements java.io.Serializable {
 	}
 
 	public void delete() {
+	}
+	
+	public void setCode(int codigo){	
+		this.teste = codigo;
+	}
+	
+	public int getCode(){
+		return this.teste;
 	}
 
 	public Long getId() {

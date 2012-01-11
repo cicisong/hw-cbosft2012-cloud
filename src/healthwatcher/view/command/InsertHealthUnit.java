@@ -36,9 +36,17 @@ public class InsertHealthUnit extends Command {
 			String description = request.getInput("description");			
 			
 			hu = new HealthUnit(description, null);
-			hu.setId(Long.parseLong(code));
+			
+			//#if relacional
+//@			hu.setId(Long.parseLong(code)); 
+			//#endif
+			
+			//#if norelacional
+			hu.setCode(Integer.parseInt(code)); //Thiago alterou aqui
+			//#endif
+			
 			facade.insert(hu);
-        
+			        
             out.println(HTMLCode.htmlPageAdministrator("Operation executed", "HealthUnit inserted"));
             out.close();
         } catch (ObjectAlreadyInsertedException e) {

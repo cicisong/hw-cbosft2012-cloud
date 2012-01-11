@@ -92,7 +92,7 @@ public class InsertAnimalComplaint extends Command {
                     "<p> <h2> Animal Complaint inserted</h2> </p>" +
                     "<p> <h2> Save the complaint number: " + codigo + "</h2> </p>")); 
             
-            out.println(HTMLCode.close());
+            //out.println(HTMLCode.close());
             out.close();
             
         } catch (RepositoryException e) {

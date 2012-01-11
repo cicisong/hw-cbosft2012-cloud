@@ -27,7 +27,7 @@ public class UpdateMedicalSpecialityData extends Command {
             String descricao = request.getInput("descricao");            
             
             speciality.setDescricao(descricao);
-        	
+        	facade.updateMedicalSpeciality(speciality);
             out.println(HTMLCode.htmlPageAdministrator("Operation executed", "Medical Speciality updated"));
 
         }catch(Exception e){

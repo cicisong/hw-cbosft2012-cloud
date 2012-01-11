@@ -51,7 +51,7 @@ public class UpdateComplaintSearch extends Command {
 
             out.println(HTMLCode.open("Update complaint"));
             out.println("<script language=\"javascript\">");
-            out.println("function submeterDados(modulo)");
+            out.println("function submeterDados()");
             out.println("{");
     
             String a1 = "\"";

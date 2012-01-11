@@ -24,7 +24,13 @@ public class HealthUnitRecord {
 
 	public IteratorDsk searchSpecialityByHealthUnit(Long code) throws ObjectNotFoundException,
 			RepositoryException {
-		HealthUnit us = healthUnitRep.search(code);
+		//#if relacional
+//@		HealthUnit us = healthUnitRep.search(code);
+		//#endif
+		
+		//#if norelacional
+		HealthUnit us = healthUnitRep.partialSearch(code);
+		//#endif
 		return new ConcreteIterator(us.getSpecialities());
 	}
 

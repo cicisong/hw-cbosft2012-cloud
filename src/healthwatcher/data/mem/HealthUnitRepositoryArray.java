@@ -139,4 +139,11 @@ public class HealthUnitRepositoryArray implements IHealthUnitRepository {
 		return i;
 	}
 
+	@Override
+	public HealthUnit partialSearch(Long codigo) throws RepositoryException,
+			ObjectNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
