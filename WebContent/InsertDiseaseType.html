@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<title>Health-Watcher - Disease Type</title>
+</head>
+<body>
+<script language="javascript">
+<!--
+
+   function ehNumero( field ) 
+   {
+      for( var i = 0; i < field.length; i++ ) {
+         c = field.charAt( i );
+         if ( ( escape( c ) < "0" ) || ( escape( c ) > "9" ) ) {
+            return false;
+         }
+      }
+      return true;
+   }
+	 
+
+   function submeterDados(modulo) 
+   {
+			
+      var f = document.formDiseaseType;
+      
+      if(f.description.value == "")
+      {
+      	alert("Type the description!");
+        f.description.select();
+        f.description.focus();
+        return;
+      }
+      
+      if(f.name.value == "")
+      {
+      	alert("Type the description!");
+        f.name.select();
+        f.name.focus();
+        return;
+      }
+      
+      if(f.manifestacao.value == "")
+      {
+      	alert("Type the description!");
+        f.manifestacao.select();
+        f.manifestacao.focus();
+        return;
+      }
+      
+      if(f.duration.value == "")
+      {
+      	alert("Type the description!");
+        f.duration.select();
+        f.duration.focus();
+        return;
+      }
+      
+      if(f.code.value != "")
+      {
+          if(!ehNumero(f.code.value)){
+			alert("The code of disease type must be a number!")
+			f.code.select();
+			f.code.focus();
+			return;
+          }
+      }
+      else {
+         alert("Type the code of disease type!");
+         f.code.select();
+         f.code.focus();
+         return;
+      }
+      
+      f.operation.value = "InsertDiseaseType";
+      f.submit();
+   }
+
+//-->
+</script>
+
+<h1>Disease Type</h1>
+
+<form method="POST" action="HWServlet" name="formDiseaseType">
+  <input type="hidden" name="operation" values="InsertDiseaseType">
+  <p>Disease Code: <input type="text" name="code" size="41"></p>
+  <p>Disease Name: <input type="text" name="name" size="41"></p>
+  <p>Disease Description:</p>
+  <p><textarea rows="6" name="description" cols="63"></textarea></p>
+  <p>Disease Manifestation: <input type="text" name="manifestacao" size="41"></p>
+  <p>Disease Duration: <input type="text" name="duration" size="41"></p>
+  <div align="center"><center><p><input type="button" value="Insert" name="bt1"
+  onClick="javascript:submeterDados();"> <input type="reset" value="Clear" name="bt2"> </p>
+  </center></div>
+</form>
+<p><center><a href="index.html">Main menu</a><p><small>Health-Watcher - 2004</small></center>
+
+</body>
+</html>
