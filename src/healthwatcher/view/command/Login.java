@@ -1,6 +1,7 @@
 package healthwatcher.view.command;
 
 import healthwatcher.Constants;
+import healthwatcher.login.google.GoogleLogin;
 import healthwatcher.model.employee.Employee;
 import healthwatcher.view.IFacade;
 
@@ -34,30 +35,36 @@ public class Login extends Command {
 
         String login = request.getInput("login");
         String password = request.getInput("password");        
-
+        boolean status=false;
         try {
-        	Employee employee = new Employee("admin", "admin", "admin");// facade.searchEmployee(login);
-           
-            if (employee.validatePassword(password)) {
+        	Employee employee = facade.searchEmployee(login);
+        	
+        	//#if loginsystem=="Google"
+        		status=GoogleLogin.authenticate(login, password);
+        	//#endif
+        	//#if loginsystem=="Database"
+//@        		status=employee.validatePassword(password);
+        	//#endif
+            if (status) {
             	//#if relacional
-//@            	employee.addObserver(facade); //Thiago alterou aqui
+            	employee.addObserver(facade); //Thiago alterou aqui
             	//#endif
             	
             	request.setAuthorized(true);
                 request.put(Login.EMPLOYEE, employee);
                
                 //#if relacional 
-//@                	out.println(Library.getFileListReplace(keywords, newWords, Constants.FORM_PATH+"MenuEmployee.html"));
+                	out.println(Library.getFileListReplace(keywords, newWords, Constants.FORM_PATH+"MenuEmployee.html"));
                 //#endif
                 //#if norelacional
-                	out.println(Library.getFileListReplace(keywords, newWords, "MenuEmployee.html"));//Thiago alterou aqui
+//@                	out.println(Library.getFileListReplace(keywords, newWords, "MenuEmployee.html"));//Thiago alterou aqui
                 //#endif
             } else {                              
             	//#if relacional
-//@            		out.println(HTMLCode.errorPage("Invalid password! <br><a href=\""+Constants.SYSTEM_LOGIN+"\">Try again</a>"));
+            		out.println(HTMLCode.errorPage("Invalid password! <br><a href=\""+Constants.SYSTEM_LOGIN+"\">Try again</a>"));
             	//#endif
             	//#if norelacional
-            		out.println(HTMLCode.errorPage("Invalid password! <br><a href=\"Login.html\">Try again</a>"));//Thiago alterou aqui
+//@            		out.println(HTMLCode.errorPage("Invalid password! <br><a href=\"Login.html\">Try again</a>"));//Thiago alterou aqui
             	//#endif
             }
         //} catch (ObjectNotFoundException e) {
