@@ -45,7 +45,7 @@ public class GetDataForSearchByHealthUnit extends Command {
 				do {
 					us = (HealthUnit) repUS.next();
 					
-					//#if nonorelacional
+					//#if relacional
 //@					out.println("<option value=\"" + us.getId() + "\"> " 
 //@							+ us.getDescription() + " </OPTION>");
 					//#endif
