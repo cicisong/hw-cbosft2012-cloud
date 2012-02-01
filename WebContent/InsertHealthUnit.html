@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<title>Health-Watcher - Insert Medical Speciality</title>
+</head>
+<body>
+<script language="javascript">
+<!--
+
+   function ehNumero( field ) 
+   {
+      for( var i = 0; i < field.length; i++ ) {
+         c = field.charAt( i );
+         if ( ( escape( c ) < "0" ) || ( escape( c ) > "9" ) ) {
+            return false;
+         }
+      }
+      return true;
+   }
+	 
+
+   function submeterDados() 
+   {
+			
+      var f = document.formHealthUnit;
+      
+      if(f.description.value == "")
+      {
+      	alert("Type the description!");
+        f.description.select();
+        f.description.focus();
+        return;
+      
+      }
+      
+      if(f.code.value != "")
+      {
+          if(!ehNumero(f.code.value)){
+			alert("The code of health unit must be a number!")
+			f.code.select();
+			f.code.focus();
+			return;
+          }
+      }
+      else {
+         alert("Type the code of unit!");
+         f.code.select();
+         f.code.focus();
+         return;
+      }
+      
+      f.operation.value = "InsertHealthUnit";
+      f.submit();
+   }
+
+//-->
+</script>
+
+<h1>Health Unit</h1>
+
+<form method="POST" action="HWServlet" name="formHealthUnit">
+  <input type="hidden" name="operation" values="InsertHealthUnit">
+  <p>Health Unit Code: <input type="text" name="code" size="41"></p>
+  <p>Health Unit Description:</p>
+  <p><textarea rows="6" name="description" cols="63"></textarea></p>
+  <div align="center"><center><p><input type="button" value="Insert" name="bt1"
+  onClick="javascript:submeterDados();"> <input type="reset" value="Clear" name="bt2"> </p>
+  </center></div>
+</form>
