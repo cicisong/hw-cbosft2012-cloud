@@ -40,10 +40,10 @@ public class Login extends Command {
         	Employee employee = facade.searchEmployee(login);
         	
         	//#if (loginsystem=="GoogleAuthentication")
-        		status=GoogleLogin.authenticate(login, password);
+        		//status=GoogleLogin.authenticate(login, password);
         	//#endif
         	//#if (loginsystem=="Database")
-//@        		status=employee.validatePassword(password);
+status=employee.validatePassword(password);
         	//#endif
             if (status) {
             	//#if (persistence=="relational")
