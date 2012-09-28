@@ -61,7 +61,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 			complaint = new FoodComplaint();
 
 			// fazer join para acessar as duas tabelas
-			sql = "select * from SCBS_queixa q,SCBS_queixaalimentar qa where q.codigo=qa.codigo and q."
+			sql = "select * from scbs_queixa q,scbs_queixaalimentar qa where q.codigo=qa.codigo and q."
 					+ "codigo = '" + code + "';";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
@@ -124,7 +124,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 			// A primeira tabela contém os dados genéricos a todas as
 			// queixas, a segunda tabela contém os dados específicos
 			// a complaint animal
-			sql = "select * from SCBS_queixa q,SCBS_queixaanimal qa where q.codigo=qa.codigo and q."
+			sql = "select * from scbs_queixa q,scbs_queixaanimal qa where q.codigo=qa.codigo and q."
 					+ "codigo = '" + codigo + "'";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
@@ -269,7 +269,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 			complaint = new SpecialComplaint();
 
 			// fazer join para acessar as duas tabelas
-			sql = "select * from SCBS_queixa q, SCBS_queixadiversa qd where q.codigo=qd.codigo and q."
+			sql = "select * from scbs_queixa q, scbs_queixadiversa qd where q.codigo=qd.codigo and q."
 					+ "codigo = '" + code + "'";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
@@ -311,7 +311,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 					try {
 						Statement stmt = (Statement) this.mp.getCommunicationChannel();
 						// vendo se a versão do objeto é a mesma no BD
-						sql = "select ts from SCBS_queixa " + " where codigo='"
+						sql = "select ts from scbs_queixa " + " where codigo='"
 								+ complaint.getCodigo() + "'";
 						ResultSet resultSet = stmt.executeQuery(sql);
 						if (resultSet.next()) {
@@ -329,7 +329,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 						resultSet.close();
 						stmt.close();
 						stmt = (Statement) this.mp.getCommunicationChannel();
-						sql = "update SCBS_queixa set " + "observacao='"
+						sql = "update scbs_queixa set " + "observacao='"
 								+ complaint.getObservacao() + "', " + "situacao= '"
 								+ complaint.getSituacao() + "', ts= '"
 								+ complaint.getTimestamp() + "'";
@@ -358,7 +358,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 			} catch (PersistenceMechanismException e) {
 				throw new RepositoryException(ExceptionMessages.EXC_FALHA_ATUALIZACAO);
 			}
-			updateTimestamp(complaint.getTimestamp() + "", "SCBS_queixa", complaint.getCodigo()
+			updateTimestamp(complaint.getTimestamp() + "", "scbs_queixa", complaint.getCodigo()
 					+ "");
 		}
 	}
@@ -458,7 +458,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 				complaintType = ANIMAL_COMPLAINT;
 			}
 
-			sql = "INSERT INTO SCBS_queixa (codigo,tipoqueixa,solicitante,descricao,observacao,email,funcionario,situacao,dataparecer,dataqueixa,enderecosolicitante,ts) VALUES(";
+			sql = "INSERT INTO scbs_queixa (codigo,tipoqueixa,solicitante,descricao,observacao,email,funcionario,situacao,dataparecer,dataqueixa,enderecosolicitante,ts) VALUES(";
 			sql += "'" + complaint.getCodigo() + "'" + ",";
 			sql += "'" + complaintType + "'" + ",";
 			sql += "'" + complaint.getSolicitante() + "',";
@@ -519,7 +519,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 		boolean response = false;
 		String consulta = null;
 		try {
-			consulta = "select codigo from SCBS_queixa where codigo='" + code + "'";
+			consulta = "select codigo from scbs_queixa where codigo='" + code + "'";
 
 			Statement stmt = (Statement) mp.getCommunicationChannel();
 			resultSet = stmt.executeQuery(consulta);
@@ -541,7 +541,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 		String consulta = null;
 		try {
 			if (complaint != null) {
-				consulta = "select * FROM SCBS_queixa";
+				consulta = "select * FROM scbs_queixa";
 
 				Statement stmt = (Statement) mp.getCommunicationChannel();
 				resultSet = stmt.executeQuery(consulta);
@@ -575,14 +575,14 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 			throw new SQLPersistenceMechanismException(ExceptionMessages.EXC_FALHA_INCLUSAO,consulta);
 			
 		}
-		updateTimestamp(complaint.getTimestamp() + "", "SCBS_queixa", complaint.getCodigo() + "");
+		updateTimestamp(complaint.getTimestamp() + "", "scbs_queixa", complaint.getCodigo() + "");
 		return complaint.getCodigo();
 	}
 
 	private void insertFood(FoodComplaint complaint) throws RepositoryException {
 		String sql = null;
 		try {
-			sql = "insert into SCBS_queixaalimentar (codigo,qtdecomensais,qtdedoentes,qtdeinternacoes,qtdeobitos,localatendimento,refeicaosuspeita,enderecodoente) values (";
+			sql = "insert into scbs_queixaalimentar (codigo,qtdecomensais,qtdedoentes,qtdeinternacoes,qtdeobitos,localatendimento,refeicaosuspeita,enderecodoente) values (";
 			sql += "'" + complaint.getCodigo() + "','";
 			sql += complaint.getQtdeComensais() + "','";
 			sql += complaint.getQtdeDoentes() + "','";
@@ -611,7 +611,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 		String sql = null;
 		try {
 			// Inserir na tabela agora
-			sql = "insert into SCBS_queixaanimal (codigo,qtdeanimais,dataincomodo,animal,enderecolocalocorrencia) values (";
+			sql = "insert into scbs_queixaanimal (codigo,qtdeanimais,dataincomodo,animal,enderecolocalocorrencia) values (";
 			sql += "'" + complaint.getCodigo() + "','";
 			sql += complaint.getAnimalQuantity() + "',";
 			sql += "'" + complaint.getInconvenienceDate() + "',";
@@ -637,7 +637,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 		String sql = null;
 		try {
 			// Inserir na tabela agora
-			sql = "insert into SCBS_queixadiversa (codigo,idade,ocupacao,instrucao,enderecoocorrencia) values (";
+			sql = "insert into scbs_queixadiversa (codigo,idade,ocupacao,instrucao,enderecoocorrencia) values (";
 			sql += "'" + complaint.getCodigo() + "','";
 			sql += complaint.getIdade() + "',";
 			sql += "'" + complaint.getOcupacao() + "',";
@@ -661,7 +661,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 	public Complaint search(Long code) throws RepositoryException, ObjectNotFoundException {
 		// Query montada para obtenção do tipo de queixa referente ao
 		// código informado
-		String sql = "SELECT tipoqueixa FROM SCBS_queixa WHERE codigo = '" + code + "'";
+		String sql = "SELECT tipoqueixa FROM scbs_queixa WHERE codigo = '" + code + "'";
 		int tipoQueixa;
 		Complaint q = null;
 
@@ -702,7 +702,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 		default:
 			throw new IllegalArgumentException();
 		}
-		long timestamp = searchTimestamp("SCBS_queixa", q.getCodigo() + "");
+		long timestamp = searchTimestamp("scbs_queixa", q.getCodigo() + "");
 		q.setTimestamp(timestamp);
 		return q;
 	}
@@ -768,7 +768,7 @@ public class ComplaintRepositoryRDB implements IComplaintRepository {
 
 	public IteratorDsk getComplaintList() throws ObjectNotFoundException, RepositoryException {
 		List<Complaint> cList = new ArrayList<Complaint>();
-		String sql = "SELECT * FROM SCBS_queixa";
+		String sql = "SELECT * FROM scbs_queixa";
 		ResultSet rs = null;
 		Complaint complaint = null;
 		try {

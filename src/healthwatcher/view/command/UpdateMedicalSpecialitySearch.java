@@ -35,7 +35,7 @@ public class UpdateMedicalSpecialitySearch extends Command {
             
             MedicalSpeciality speciality = facade.searchSpecialitiesByCode(specialityCode);
             //#if relacional
-//@            speciality.addObserver(facade); //thiago alterou aqui
+            speciality.addObserver(facade); //thiago alterou aqui
             //#endif
             
             request.put(SPECIALITY, speciality);

@@ -31,7 +31,7 @@ public class EmployeeRepositoryRDB implements IEmployeeRepository {
 		String sql = null;
 		try {
 			//Inserir na tabela agora
-			sql = "insert into SCBS_funcionario (login,nome,senha) values ('";
+			sql = "insert into scbs_funcionario (login,nome,senha) values ('";
 
 			sql += employee.getLogin() + "',";
 			sql += "'" + employee.getName() + "',";
@@ -53,7 +53,7 @@ public class EmployeeRepositoryRDB implements IEmployeeRepository {
 		String sql = null;
 		try {
 
-			sql = "select * from SCBS_funcionario where login='" + login + "'";
+			sql = "select * from scbs_funcionario where login='" + login + "'";
 
 			Statement stmt = (Statement) this.pm.getCommunicationChannel();
 			resultSet = stmt.executeQuery(sql);
@@ -78,7 +78,7 @@ public class EmployeeRepositoryRDB implements IEmployeeRepository {
 		boolean response = false;
 		String sql = null;
 		try {
-			sql = "select * from SCBS_funcionario where login='" + login + "'";
+			sql = "select * from scbs_funcionario where login='" + login + "'";
 
 			Statement stmt = (Statement) this.pm.getCommunicationChannel();
 			resultSet = stmt.executeQuery(sql);
@@ -97,7 +97,7 @@ public class EmployeeRepositoryRDB implements IEmployeeRepository {
 		String sql = null;
 		try {
 			//Inserir na tabela agora
-			sql = "UPDATE SCBS_funcionario SET senha='" + employee.getPassword() + "', nome='"
+			sql = "UPDATE scbs_funcionario SET senha='" + employee.getPassword() + "', nome='"
 					+ employee.getName() + "' where login='" + employee.getLogin() + "'";
 			Statement stmt = (Statement) this.pm.getCommunicationChannel();
 			stmt.executeUpdate(sql);

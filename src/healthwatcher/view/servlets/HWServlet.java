@@ -201,15 +201,15 @@ public class HWServlet extends HttpServlet {
     		retry(request, response);
     	} catch (Exception e) {
     		e.printStackTrace();
-    	} finally {
+    	} /*finally {
     		try {
-    			response.getOutputStream().close();
+    			//response.getOutputStream().close();
     		} catch (IOException e) {
     			e.printStackTrace();
     		} catch (java.lang.IllegalStateException e){
     			e.printStackTrace();
     		}
-    	}
+    	}*/
     }
     
     /**

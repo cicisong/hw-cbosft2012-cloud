@@ -30,7 +30,7 @@ public class LoginMenu extends Command {
                 throw new InvalidSessionException("Invalid Session! <br><a href=\""+Constants.SYSTEM_LOGIN+"\">Try again</a>");
             }            
                                            
-            out.println(Library.getFileListReplace(keywords, newWords, "MenuEmployee.html"));
+            out.println(Library.getFileListReplace(keywords, newWords,Constants.FORM_PATH +"MenuEmployee.html"));
         } catch (Exception e) {
             out.println(HTMLCode.errorPageAdministrator(e.getMessage()));
         } finally {           

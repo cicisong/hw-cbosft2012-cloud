@@ -37,7 +37,7 @@ public class UpdateSymptomSearch extends Command {
             Symptom symptom = facade.searchSymptom(symptomCode);
             
             //#if relacional
-//@            symptom.addObserver(facade);
+            symptom.addObserver(facade);
             //#endif
             
             request.put(SYMPTOM, symptom);

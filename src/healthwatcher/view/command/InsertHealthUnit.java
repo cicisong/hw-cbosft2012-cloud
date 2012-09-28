@@ -38,11 +38,11 @@ public class InsertHealthUnit extends Command {
 			hu = new HealthUnit(description, null);
 			
 			//#if relacional
-//@			hu.setId(Long.parseLong(code)); 
+			hu.setId(Long.parseLong(code)); 
 			//#endif
 			
 			//#if norelacional
-			hu.setCode(Integer.parseInt(code)); //Thiago alterou aqui
+//@			hu.setCode(Integer.parseInt(code)); //Thiago alterou aqui
 			//#endif
 			
 			facade.insert(hu);

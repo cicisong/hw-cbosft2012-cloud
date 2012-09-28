@@ -49,13 +49,13 @@ public class GetDataForSearchBySpeciality extends Command {
 					esp = (MedicalSpeciality) repEsp.next();
 					
 					//#if relacional
-//@					out.println("<option value=\"" + esp.getId() + "\"> "
-//@							+ esp.getDescricao() + " </OPTION>");
+					out.println("<option value=\"" + esp.getId() + "\"> "
+							+ esp.getDescricao() + " </OPTION>");
 					//#endif
 					
 					//#if norelacional
-					out.println("<option value=\"" + esp.getCode() + "\"> "//thiago alterou aqui
-							+ esp.getDescricao() + " </OPTION>");
+//@					out.println("<option value=\"" + esp.getCode() + "\"> "//thiago alterou aqui
+//@							+ esp.getDescricao() + " </OPTION>");
 					//#endif
 				} while (repEsp.hasNext());
 

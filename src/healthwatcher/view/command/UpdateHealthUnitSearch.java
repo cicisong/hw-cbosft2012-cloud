@@ -41,7 +41,7 @@ public class UpdateHealthUnitSearch extends Command {
             
             HealthUnit unit = facade.searchHealthUnit(numUS);
             //#if relacional
-//@            unit.addObserver(facade); //thiago alterou aqui
+            unit.addObserver(facade); //thiago alterou aqui
             //#endif
             
             request.put(UpdateHealthUnitSearch.HEALTH_UNIT, unit);

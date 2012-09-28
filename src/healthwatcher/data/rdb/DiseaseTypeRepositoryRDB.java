@@ -46,7 +46,7 @@ public class DiseaseTypeRepositoryRDB implements IDiseaseRepository {
 		boolean response = false;
         String sql=null;
         try {
-            sql = "select * from SCBS_tipodoenca where "
+            sql = "select * from scbs_tipodoenca where "
                 + "codigo = '" + code+"'";
 
             Statement stmt = (Statement) this.mp.getCommunicationChannel();
@@ -64,7 +64,7 @@ public class DiseaseTypeRepositoryRDB implements IDiseaseRepository {
 
 	public IteratorDsk getDiseaseTypeList() throws RepositoryException, ObjectNotFoundException {
 		List listatd = new ArrayList();
-		String sql = "SELECT * FROM SCBS_tipodoenca";
+		String sql = "SELECT * FROM scbs_tipodoenca";
 		ResultSet rs = null;
 
 		try {
@@ -99,7 +99,7 @@ public class DiseaseTypeRepositoryRDB implements IDiseaseRepository {
         	String sql=null;
             try {
                 Statement stmt = (Statement) this.mp.getCommunicationChannel();
-                sql = "insert into SCBS_tipodoenca (codigo, nome, DESCRICAO, manifestacao, duracao) values ('";
+                sql = "insert into scbs_tipodoenca (codigo, nome, DESCRICAO, manifestacao, duracao) values ('";
                 sql += td.getId() + "','";
                 sql += td.getName() + "','";
                 sql += td.getDescription() + "','";
@@ -141,7 +141,7 @@ public class DiseaseTypeRepositoryRDB implements IDiseaseRepository {
 		// Tentativa de recuperar os dados do bd usando o código 
 		// informado
 		try {
-			sql = "select * from SCBS_tipodoenca where " + "codigo = '" + codigo + "'";
+			sql = "select * from scbs_tipodoenca where " + "codigo = '" + codigo + "'";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
 			resultSet = stmt.executeQuery(sql);
@@ -202,7 +202,7 @@ public class DiseaseTypeRepositoryRDB implements IDiseaseRepository {
 		// Tentativa de recuperar os dados do bd usando o código 
 		// informado
 		try {
-			sql = "select * from SCBS_tipodoenca where " + "codigo = '" + code + "'";
+			sql = "select * from scbs_tipodoenca where " + "codigo = '" + code + "'";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
 			resultSet = stmt.executeQuery(sql);
@@ -224,7 +224,7 @@ public class DiseaseTypeRepositoryRDB implements IDiseaseRepository {
 
 			// Query para recuperar os sintomas relacionados com o tipo
 			// de doença encontrado a partir do código
-			sql = "select * from SCBS_tipodoencasintoma where codigotipodoenca = '" + code + "'";
+			sql = "select * from scbs_tipodoencasintoma where codigotipodoenca = '" + code + "'";
 
 			stmt = (Statement) this.mp.getCommunicationChannel();
 			resultSet = stmt.executeQuery(sql);
@@ -235,7 +235,7 @@ public class DiseaseTypeRepositoryRDB implements IDiseaseRepository {
 
 				// Query para encontrar os dados de um sintoma usando o
 				// código encontrado na tabela de relacionamentos.
-				sql = "select * from SCBS_sintoma where " + "codigo = '" + codeSymptom + "'";
+				sql = "select * from scbs_sintoma where " + "codigo = '" + codeSymptom + "'";
 
 				Statement stmt2 = (Statement) this.mp.getCommunicationChannel();
 				ResultSet resultSet2 = stmt2.executeQuery(sql);

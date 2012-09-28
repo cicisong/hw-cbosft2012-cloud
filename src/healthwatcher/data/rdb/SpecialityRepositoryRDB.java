@@ -42,7 +42,7 @@ public class SpecialityRepositoryRDB implements ISpecialityRepository {
 			String sql=null;
 			try {
 				Statement stmt = (Statement) this.mp.getCommunicationChannel();
-				sql = "update SCBS_especialidade set " +
+				sql = "update scbs_especialidade set " +
                 "descricao='" + esp.getDescricao() + "'" +
                 " where codigo = '"+esp.getId()+"'";
 				stmt.executeUpdate(sql);
@@ -67,7 +67,7 @@ public class SpecialityRepositoryRDB implements ISpecialityRepository {
 		boolean response = false;
         String sql=null;
         try {
-        	sql = "select * from SCBS_especialidade where "
+        	sql = "select * from scbs_especialidade where "
                 + "codigo = '" + code + "'";
 
             Statement stmt = (Statement) this.mp.getCommunicationChannel();
@@ -86,7 +86,7 @@ public class SpecialityRepositoryRDB implements ISpecialityRepository {
 	public IteratorDsk getSpecialityList() throws RepositoryException, ObjectNotFoundException {
 
 		List listaEsp = new ArrayList();
-		String sql = "SELECT * FROM SCBS_especialidade";
+		String sql = "SELECT * FROM scbs_especialidade";
 		ResultSet rs = null;
 
 		try {
@@ -126,7 +126,7 @@ public class SpecialityRepositoryRDB implements ISpecialityRepository {
 			String sql = null;
 			try {
 				Statement stmt = (Statement) mp.getCommunicationChannel();
-				sql = "insert into SCBS_especialidade (codigo,descricao) values (";
+				sql = "insert into scbs_especialidade (codigo,descricao) values (";
 				sql += spec.getId() + ",'";
 				sql += spec.getDescricao() + "')";
 
@@ -153,7 +153,7 @@ public class SpecialityRepositoryRDB implements ISpecialityRepository {
 		MedicalSpeciality esp = null;
 		String sql = null;
 		try {
-			sql = "select * from SCBS_especialidade where " + "codigo = '" + code + "'";
+			sql = "select * from scbs_especialidade where " + "codigo = '" + code + "'";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
 			resultSet = stmt.executeQuery(sql);

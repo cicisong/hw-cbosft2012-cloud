@@ -77,7 +77,7 @@ public class AddressRepositoryRDB implements IAddressRepository {
 			try {
 
 				//pega id e codigo e seta no objeto primeiro
-				consulta = "select * from SCBS_endereco";
+				consulta = "select * from scbs_endereco";
 
 				stmt = (Statement) mp.getCommunicationChannel();
 				resultSet = stmt.executeQuery(consulta);
@@ -102,7 +102,7 @@ public class AddressRepositoryRDB implements IAddressRepository {
 			String sql = null;
 			try {
 				stmt = (Statement) mp.getCommunicationChannel();
-				sql = "SELECT * FROM SCBS_endereco WHERE codigo = '" + end.getId() + "'";
+				sql = "SELECT * FROM scbs_endereco WHERE codigo = '" + end.getId() + "'";
 				resultSet = stmt.executeQuery(sql);
 
 				if (resultSet.next()) {
@@ -118,7 +118,7 @@ public class AddressRepositoryRDB implements IAddressRepository {
 			// recebidos no objeto do parâmetro com código e
 			// identificador devidamente alterados
 			try {
-				sql = "INSERT INTO SCBS_endereco VALUES(";
+				sql = "INSERT INTO scbs_endereco VALUES(";
 
 				//sql += end.getId() + ",";
 				sql += "'" + end.getId() + "',";
@@ -160,7 +160,7 @@ public class AddressRepositoryRDB implements IAddressRepository {
 		Address end = null;
 		String sql = null;
 		try {
-			sql = "select * from SCBS_endereco where " + " codigo = '" + code + "'";
+			sql = "select * from scbs_endereco where " + " codigo = '" + code + "'";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
 

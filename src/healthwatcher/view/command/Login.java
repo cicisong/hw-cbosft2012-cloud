@@ -39,15 +39,15 @@ public class Login extends Command {
         try {
         	Employee employee = facade.searchEmployee(login);
         	
-        	//#if loginsystem=="Google"
+        	//#if (loginsystem=="GoogleAuthentication")
         		status=GoogleLogin.authenticate(login, password);
         	//#endif
-        	//#if loginsystem=="Database"
+        	//#if (loginsystem=="Database")
 //@        		status=employee.validatePassword(password);
         	//#endif
             if (status) {
-            	//#if relacional
-            	employee.addObserver(facade); //Thiago alterou aqui
+            	//#if (persistence=="relational")
+//@            	employee.addObserver(facade); 
             	//#endif
             	
             	request.setAuthorized(true);

@@ -93,10 +93,10 @@ public class HealthWatcherFacade implements IFacade {
 		if (Constants.isPersistent()) {
 			try {
 				//#if relacional
-//@					returnValue = PersistenceMechanism.getInstance();
+					returnValue = PersistenceMechanism.getInstance();
 				//#endif
 				//#if norelacional
-					returnValue = PersistenceMechanismJDO.getInstance();//Thiago alterou aqui
+//@					returnValue = PersistenceMechanismJDO.getInstance();//Thiago alterou aqui
 				//#endif
 				// Persistence mechanism connection
 				returnValue.connect();

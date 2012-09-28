@@ -38,7 +38,7 @@ public class Employee implements Serializable, Subject {
 	private String password;
 	
 	//#if relacional
-//@	private List subscribers = new ArrayList();
+	private List subscribers = new ArrayList();
 	//#endif
 
 	public Employee(String login, String password, String name) {
@@ -55,7 +55,7 @@ public class Employee implements Serializable, Subject {
 		this.name = name;
 		
 		//#if relacional
-//@		notifyObservers();
+		notifyObservers();
 		//#endif
 	}
 
@@ -66,14 +66,14 @@ public class Employee implements Serializable, Subject {
 	public void setLogin(String login) {
 		this.login = login;
 		//#if relacional
-//@		notifyObservers();
+		notifyObservers();
 		//#endif
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 		//#if relacional
-//@		notifyObservers();
+		notifyObservers();
 		//#endif
 	}
 
@@ -85,52 +85,54 @@ public class Employee implements Serializable, Subject {
 		return this.password.equals(password);
 	}
 
+	
+
 	//#if norelacional
-	@Override
-	public void addObserver(Observer observer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeObserver(Observer observer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void notifyObservers() {
-		// TODO Auto-generated method stub
-		
-	}
+//@	@Override
+//@	public void addObserver(Observer observer) {
+//@		// TODO Auto-generated method stub
+//@		
+//@	}
+//@
+//@	@Override
+//@	public void removeObserver(Observer observer) {
+//@		// TODO Auto-generated method stub
+//@		
+//@	}
+//@
+//@	@Override
+//@	public void notifyObservers() {
+//@		// TODO Auto-generated method stub
+//@		
+//@	}
 	//#endif
 	
 	//#if relacional
-//@	public void addObserver(Observer observer) {
-//@		subscribers.add(observer);
-//@	}
-//@
-//@	public void removeObserver(Observer observer) {
-//@		subscribers.remove(observer);
-//@	}
-//@
-//@	public void notifyObservers() {
-//@		for (Iterator it = subscribers.iterator(); it.hasNext();) {
-//@			Observer observer = (Observer) it.next();
-//@			try {
-//@				observer.notify(this);
-//@			} catch (RemoteException e) {
-//@				e.printStackTrace();
-//@			} catch (ObjectNotValidException e) {
-//@				e.printStackTrace();
-//@			} catch (ObjectNotFoundException e) {
-//@				e.printStackTrace();
-//@			} catch (TransactionException e) {
-//@				e.printStackTrace();
-//@			} catch (RepositoryException e) {
-//@				e.printStackTrace();
-//@			}
-//@		}
-//@	} 
+	public void addObserver(Observer observer) {
+		subscribers.add(observer);
+	}
+
+	public void removeObserver(Observer observer) {
+		subscribers.remove(observer);
+	}
+
+	public void notifyObservers() {
+		for (Iterator it = subscribers.iterator(); it.hasNext();) {
+			Observer observer = (Observer) it.next();
+			try {
+				observer.notify(this);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			} catch (ObjectNotValidException e) {
+				e.printStackTrace();
+			} catch (ObjectNotFoundException e) {
+				e.printStackTrace();
+			} catch (TransactionException e) {
+				e.printStackTrace();
+			} catch (RepositoryException e) {
+				e.printStackTrace();
+			}
+		}
+	} 
 	//#endif
 }

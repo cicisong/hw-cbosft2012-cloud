@@ -46,13 +46,13 @@ public class GetDataForSearchByHealthUnit extends Command {
 					us = (HealthUnit) repUS.next();
 					
 					//#if relacional
-//@					out.println("<option value=\"" + us.getId() + "\"> " 
-//@							+ us.getDescription() + " </OPTION>");
+					out.println("<option value=\"" + us.getId() + "\"> " 
+							+ us.getDescription() + " </OPTION>");
 					//#endif
 					
 					//#if norelacional
-					out.println("<option value=\"" + us.getCode() + "\"> " //Thiago alterou aqui
-							+ us.getDescription() + " </OPTION>");
+//@					out.println("<option value=\"" + us.getCode() + "\"> " //Thiago alterou aqui
+//@							+ us.getDescription() + " </OPTION>");
 					//#endif
 				} while (repUS.hasNext());
 

@@ -39,11 +39,11 @@ public class InsertMedicalSpeciality extends Command {
 			speciality = new MedicalSpeciality(description);
 			
 			//#if norelacional
-			speciality.setCode(Integer.parseInt(code)); //Thiago alterou aqui
+//@			speciality.setCode(Integer.parseInt(code)); //Thiago alterou aqui
 			//#endif
 			
 			//#if relacional
-//@			speciality.setId(Long.parseLong(code));
+			speciality.setId(Long.parseLong(code));
 			//#endif
 			
 			facade.insert(speciality);

@@ -40,7 +40,7 @@ public class SymptomRepositoryRDB implements ISymptomRepository {
         	String sql=null;
             try {
                 Statement stmt = (Statement) this.mp.getCommunicationChannel();
-                sql = "insert into SCBS_sintoma (codigo,DESCRICAO) values ('";
+                sql = "insert into scbs_sintoma (codigo,DESCRICAO) values ('";
                 sql += symptom.getId() + "','";
                 sql += symptom.getDescription() + "')";               
                 stmt.executeUpdate(sql);
@@ -69,7 +69,7 @@ public class SymptomRepositoryRDB implements ISymptomRepository {
 	        // Query montada para recuperar o sintoma
 	        // usando o identificador da sintoma informado como
 	        // parametro do metodo
-            sql = "select * from SCBS_sintoma where "
+            sql = "select * from scbs_sintoma where "
                 + "codigo = '" + symptomCode + "'";
 
             stmt = (Statement)this.mp.getCommunicationChannel();
@@ -108,7 +108,7 @@ public class SymptomRepositoryRDB implements ISymptomRepository {
         
 		// Query para selecionar os codigos de todas unidades de saude
 		// existentes no sistema
-        String    sql = "SELECT * FROM SCBS_sintoma";
+        String    sql = "SELECT * FROM scbs_sintoma";
         ResultSet rs  = null;
         Symptom symptom;
 
@@ -161,7 +161,7 @@ public class SymptomRepositoryRDB implements ISymptomRepository {
 			String sql=null;
 			try {
 				Statement stmt = (Statement) this.mp.getCommunicationChannel();
-				sql = "update SCBS_sintoma set " +
+				sql = "update scbs_sintoma set " +
                 "descricao='" + symptom.getDescription() + "'" +
                 " where codigo = '"+symptom.getId()+"'";
 				stmt.executeUpdate(sql);
@@ -186,7 +186,7 @@ public class SymptomRepositoryRDB implements ISymptomRepository {
         boolean response = false;
         String sql=null;
         try {
-            sql = "select * from SCBS_sintoma where " + "codigo = '" + code + "'";
+            sql = "select * from scbs_sintoma where " + "codigo = '" + code + "'";
 
 
             Statement stmt = (Statement) this.mp.getCommunicationChannel();

@@ -33,26 +33,26 @@ public class DiseaseRecord {
 		ObjectNotValidException {
 		try { 
 			//#if relacional
-//@			manager.beginExecution("" + diseaseType.getId());
-//@			
-//@			if (diseaseRep.exists(diseaseType.getId())) {
-//@				throw new ObjectAlreadyInsertedException(ExceptionMessages.EXC_JA_EXISTE);
-//@			} else {
-//@				this.diseaseRep.insert(diseaseType);
-//@			}
-			//#endif
+			manager.beginExecution("" + diseaseType.getId());
 			
-			//#if norelacional
-			if (diseaseRep.exists((long) diseaseType.getCode())) {
+			if (diseaseRep.exists(diseaseType.getId())) {
 				throw new ObjectAlreadyInsertedException(ExceptionMessages.EXC_JA_EXISTE);
 			} else {
 				this.diseaseRep.insert(diseaseType);
 			}
 			//#endif
+			
+			//#if norelacional
+//@			if (diseaseRep.exists((long) diseaseType.getCode())) {
+//@				throw new ObjectAlreadyInsertedException(ExceptionMessages.EXC_JA_EXISTE);
+//@			} else {
+//@				this.diseaseRep.insert(diseaseType);
+//@			}
+			//#endif
 
 		}finally {			
 			//#if relacional
-//@			manager.endExecution("" + diseaseType.getId());
+			manager.endExecution("" + diseaseType.getId());
 			//#endif
 		}		
 	}

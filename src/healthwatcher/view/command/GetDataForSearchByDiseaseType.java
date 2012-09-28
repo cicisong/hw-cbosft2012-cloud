@@ -47,13 +47,13 @@ public class GetDataForSearchByDiseaseType extends Command {
 					tp = (DiseaseType) repTP.next();
 					
 					//#if relacional
-//@					out.println("<option value=\"" + tp.getId() + "\"> "
-//@							+ tp.getName() + " </OPTION>");
+					out.println("<option value=\"" + tp.getId() + "\"> "
+							+ tp.getName() + " </OPTION>");
 					//#endif
 					
 					//#if norelacional
-					out.println("<option value=\"" + tp.getCode() + "\"> " //thiago alterou aqui
-							+ tp.getName() + " </OPTION>");
+//@					out.println("<option value=\"" + tp.getCode() + "\"> " //thiago alterou aqui
+//@							+ tp.getName() + " </OPTION>");
 					//#endif
 				} while (repTP.hasNext());
 				repTP.close();

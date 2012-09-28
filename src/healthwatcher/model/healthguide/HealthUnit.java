@@ -36,7 +36,7 @@ public class HealthUnit implements Serializable, Subject {
 	private List specialities;
 
 	//#if relacional
-//@	private List subscribers = new ArrayList();
+	private List subscribers = new ArrayList();
 	//#endif
 
 	public HealthUnit() {
@@ -84,60 +84,62 @@ public class HealthUnit implements Serializable, Subject {
 	public void setDescription(String descricao) {
 		this.description = descricao;
 		//#if relacional
-//@		notifyObservers(); // Thiago alterou aqui
+		notifyObservers(); // Thiago alterou aqui
 		//#endif
 	}
 
 	public String toString() {
 		return description;
 	}
+
+	
 	
 	//#if norelacional
-	@Override
-	public void addObserver(Observer observer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeObserver(Observer observer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void notifyObservers() {
-		// TODO Auto-generated method stub
-		
-	}
+//@	@Override
+//@	public void addObserver(Observer observer) {
+//@		// TODO Auto-generated method stub
+//@		
+//@	}
+//@
+//@	@Override
+//@	public void removeObserver(Observer observer) {
+//@		// TODO Auto-generated method stub
+//@		
+//@	}
+//@
+//@	@Override
+//@	public void notifyObservers() {
+//@		// TODO Auto-generated method stub
+//@		
+//@	}
 	//#endif
 	
 	//#if relacional
-//@	public void addObserver(Observer observer) {
-//@		subscribers.add(observer);
-//@	}
-//@
-//@	public void removeObserver(Observer observer) {
-//@		subscribers.remove(observer);
-//@	}
-//@
-//@	public void notifyObservers() {
-//@		for (Iterator it = subscribers.iterator(); it.hasNext();) {
-//@			Observer observer = (Observer) it.next();
-//@			try {
-//@				observer.notify(this);
-//@			} catch (RemoteException e) {
-//@				e.printStackTrace();
-//@			} catch (ObjectNotValidException e) {
-//@				e.printStackTrace();
-//@			} catch (ObjectNotFoundException e) {
-//@				e.printStackTrace();
-//@			} catch (TransactionException e) {
-//@				e.printStackTrace();
-//@			} catch (RepositoryException e) {
-//@				e.printStackTrace();
-//@			}
-//@		}
-//@	}
+	public void addObserver(Observer observer) {
+		subscribers.add(observer);
+	}
+
+	public void removeObserver(Observer observer) {
+		subscribers.remove(observer);
+	}
+
+	public void notifyObservers() {
+		for (Iterator it = subscribers.iterator(); it.hasNext();) {
+			Observer observer = (Observer) it.next();
+			try {
+				observer.notify(this);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			} catch (ObjectNotValidException e) {
+				e.printStackTrace();
+			} catch (ObjectNotFoundException e) {
+				e.printStackTrace();
+			} catch (TransactionException e) {
+				e.printStackTrace();
+			} catch (RepositoryException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	//#endif
 }

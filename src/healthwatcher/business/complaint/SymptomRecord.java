@@ -24,25 +24,25 @@ public class SymptomRecord {
 			ObjectNotValidException {
 		try {
 			//#if relacional
-//@			manager.beginExecution("" + symptom.getId());
-//@			if (rep.exists(symptom.getId())) {
-//@				throw new ObjectAlreadyInsertedException(ExceptionMessages.EXC_JA_EXISTE);
-//@			} else {
-//@				rep.insert(symptom);
-//@			}
+			manager.beginExecution("" + symptom.getId());
+			if (rep.exists(symptom.getId())) {
+				throw new ObjectAlreadyInsertedException(ExceptionMessages.EXC_JA_EXISTE);
+			} else {
+				rep.insert(symptom);
+			}
 			//#endif
 			
 			//#if norelacional
-			if (rep.exists((long) symptom.getCode())) {
-				throw new ObjectAlreadyInsertedException(ExceptionMessages.EXC_JA_EXISTE);
-			} else {
-				this.rep.insert(symptom);
-			}
+//@			if (rep.exists((long) symptom.getCode())) {
+//@				throw new ObjectAlreadyInsertedException(ExceptionMessages.EXC_JA_EXISTE);
+//@			} else {
+//@				this.rep.insert(symptom);
+//@			}
 			//#endif
 			
 		} finally {
 			//#if relacional
-//@			manager.endExecution("" + symptom.getId());
+			manager.endExecution("" + symptom.getId());
 			//#endif
 		}
 	}

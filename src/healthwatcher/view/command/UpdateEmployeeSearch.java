@@ -36,10 +36,10 @@ public class UpdateEmployeeSearch extends Command {
 					Constants.SERVLET_SERVER_PATH,
 					HTMLCode.closeAdministrator() };
 			//#if relacional
-//@				out.println(Library.getFileListReplace(keywords, newWords, Constants.FORM_PATH + "UpdateEmployee.html"));
+				out.println(Library.getFileListReplace(keywords, newWords, Constants.FORM_PATH + "UpdateEmployee.html"));
 			//#endif
 			//#ifdef norelacional
-				out.println(Library.getFileListReplace(keywords, newWords,"UpdateEmployee.html"));//Thiago alterou aqui
+//@				out.println(Library.getFileListReplace(keywords, newWords,"UpdateEmployee.html"));//Thiago alterou aqui
 			//#endif
 			
 

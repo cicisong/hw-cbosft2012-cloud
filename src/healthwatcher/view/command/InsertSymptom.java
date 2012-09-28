@@ -1,9 +1,14 @@
 package healthwatcher.view.command;
 
+import healthwatcher.Constants;
 import healthwatcher.model.complaint.Symptom;
 import healthwatcher.view.IFacade;
 
+import java.io.File;
 import java.io.PrintWriter;
+
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import lib.exceptions.CommunicationException;
 import lib.exceptions.FacadeUnavailableException;
@@ -37,11 +42,19 @@ public class InsertSymptom extends Command {
 			
 			symptom = new Symptom(description);
 			//#if relacional
-//@			symptom.setId(Long.parseLong(code));
+			symptom.setId(Long.parseLong(code));
 			//#endif
 			
+			File photo=new File(request.getInput("photo"));
+			PutObjectRequest putRequest=new PutObjectRequest(Constants.S3BUCKET, 
+					code+".jpg", photo);
+			
+			putRequest.setCannedAcl(CannedAccessControlList.PublicRead);
+			
+			Constants.getS3().putObject(putRequest);
+			
 			//#if norelacional
-			symptom.setCode(Integer.parseInt(code));
+//@			symptom.setCode(Integer.parseInt(code));
 			//#endif
 			
 			facade.insert(symptom);

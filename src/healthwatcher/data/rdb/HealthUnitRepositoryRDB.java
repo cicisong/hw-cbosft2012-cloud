@@ -41,7 +41,7 @@ public class HealthUnitRepositoryRDB implements IHealthUnitRepository {
 			String sql = null;
 			try {
 				Statement stmt = (Statement) this.mp.getCommunicationChannel();
-				sql = "update SCBS_unidadesaude set " + "descricao='" + us.getDescription() + "'"
+				sql = "update scbs_unidadesaude set " + "descricao='" + us.getDescription() + "'"
 						+ " where codigo = '" + us.getId() + "'";
 				stmt.executeUpdate(sql);
 				stmt.close();
@@ -65,7 +65,7 @@ public class HealthUnitRepositoryRDB implements IHealthUnitRepository {
 		boolean response = false;
         String sql=null;
         try {
-            sql = "select * from SCBS_unidadesaude where "
+            sql = "select * from scbs_unidadesaude where "
                 + "codigo = '" + code + "'";
 
             Statement stmt = (Statement) this.mp.getCommunicationChannel();
@@ -86,7 +86,7 @@ public class HealthUnitRepositoryRDB implements IHealthUnitRepository {
 
 		// Query para selecionar os códigos de todas unidades de saúde
 		// existentes no sistema
-		String sql = "SELECT codigo FROM SCBS_unidadesaude";
+		String sql = "SELECT codigo FROM scbs_unidadesaude";
 		ResultSet rs = null;
 
 		try {
@@ -135,7 +135,7 @@ public class HealthUnitRepositoryRDB implements IHealthUnitRepository {
 
 		// Query para selecionar os códigos de todas unidades de saúde
 		//existentes no sistema
-		String sql = "SELECT codigo FROM SCBS_unidadesaude";
+		String sql = "SELECT codigo FROM scbs_unidadesaude";
 		ResultSet rs = null;
 
 		try {
@@ -182,7 +182,7 @@ public class HealthUnitRepositoryRDB implements IHealthUnitRepository {
 		// Query para selecionar os códigos das unidades associadas
 		// a especialidade informada como parâmetro.
 		String sql = "select U.codigo from "
-				+ "SCBS_unidadeespecialidade R, SCBS_especialidade E, SCBS_unidadesaude U where "
+				+ "scbs_unidadeespecialidade R, scbs_especialidade E, scbs_unidadesaude U where "
 				+ "E.codigo=R.codigoespecialidade AND U.codigo=R.codigounidadesaude AND "
 				+ "E.codigo = '" + code + "'";
 
@@ -236,7 +236,7 @@ public class HealthUnitRepositoryRDB implements IHealthUnitRepository {
 			String sql = null;
 			try {
 				Statement stmt = (Statement) this.mp.getCommunicationChannel();
-				sql = "insert into SCBS_unidadesaude (codigo,DESCRICAO) values (";
+				sql = "insert into scbs_unidadesaude (codigo,DESCRICAO) values (";
 				sql += hu.getId() + ",'";
 				sql += hu.getDescription() + "')";
 				stmt.executeUpdate(sql);
@@ -266,7 +266,7 @@ public class HealthUnitRepositoryRDB implements IHealthUnitRepository {
 			// Query montada para recuperar os relacionamentos de
 			// unidades de saúde com especialidades
 			// filtrando pelo identificador da unidade.
-			sql = "select * from SCBS_unidadeespecialidade where " + "codigounidadesaude = '"
+			sql = "select * from scbs_unidadeespecialidade where " + "codigounidadesaude = '"
 					+ code + "'";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
@@ -292,7 +292,7 @@ public class HealthUnitRepositoryRDB implements IHealthUnitRepository {
 			// Query montada para recuperar a unidade de saúde
 			// usando o identificador da unidade informado como
 			// parâmetro do método
-			sql = "select * from SCBS_unidadesaude where " + "codigo = '" + code + "'";
+			sql = "select * from scbs_unidadesaude where " + "codigo = '" + code + "'";
 
 			stmt = (Statement) this.mp.getCommunicationChannel();
 			resultSet = stmt.executeQuery(sql);
@@ -337,7 +337,7 @@ public class HealthUnitRepositoryRDB implements IHealthUnitRepository {
 			// Query montada para recuperar a unidade de saúde
 			// usando o identificador da unidade informado como
 			// parâmetro do método
-			sql = "select * from SCBS_unidadesaude where " + "codigo = '" + codigo + "'";
+			sql = "select * from scbs_unidadesaude where " + "codigo = '" + codigo + "'";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
 			resultSet = stmt.executeQuery(sql);
